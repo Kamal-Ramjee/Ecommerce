@@ -1,16 +1,18 @@
-﻿<style>
+﻿@model List<Cart>
+
+<style>
     .cart-item img {
-        max-width: 100px;
-        height: auto;
+    max-width: 100px;
+    height: auto;
     }
 
     .quantity-input {
-        width: 50px;
+    width: 50px;
     }
 
     .cart-summary {
-        background-color: #f8f9fa;
-        border-radius: 10px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
     }
 </style>
 
@@ -23,51 +25,53 @@
             <!-- Cart Items -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <div class="row cart-item mb-3">
-                        <div class="col-md-3">
-                            <img src="https://via.placeholder.com/100" alt="Product 1" class="img-fluid rounded">
-                        </div>
-                        <div class="col-md-5">
-                            <h5 class="card-title">Product 1</h5>
-                            <p class="text-muted">Category: Electronics</p>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                                <input style="max-width:100px" type="text" class="form-control  form-control-sm text-center quantity-input" value="1">
-                                <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+
+                    @foreach(var cartItem in Model)
+                    {
+                        <div class="row cart-item mb-3">
+                            <div class="col-md-3">
+                                <img src="https://via.placeholder.com/100" alt="Product 1" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-5">
+                                <h5 class="card-title">Product 1</h5>
+                                <p class="text-muted">Category: Electronics</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    @{
+                                    var selectedValue = cartItem.Qty;
+
+                                    var items = new List<SelectListItem>
+                                        {
+                                        new SelectListItem { Value = "1", Text = "1", Selected = (selectedValue == 1) },
+                                        new SelectListItem { Value = "2", Text = "2", Selected = (selectedValue == 2) },
+                                        new SelectListItem { Value = "3", Text = "3", Selected = (selectedValue == 3) },
+                                        new SelectListItem { Value = "4", Text = "4", Selected = (selectedValue == 4) },
+                                        new SelectListItem { Value = "5", Text = "5", Selected = (selectedValue == 5) },
+                                        new SelectListItem { Value = "6", Text = "6", Selected = (selectedValue == 6) },
+                                        new SelectListItem { Value = "7", Text = "7", Selected = (selectedValue == 7) },
+                                        new SelectListItem { Value = "8", Text = "8", Selected = (selectedValue == 8) },
+                                        new SelectListItem { Value = "9", Text = "9", Selected = (selectedValue == 9) },
+                                        new SelectListItem { Value = "10", Text = "10", Selected = (selectedValue == 10) }
+                                        };
+                                    }
+
+                                    @* <button class="btn btn-outline-secondary btn-sm" type="button">-</button> *@
+                                    @* <input style="max-width:100px" type="text" class="form-control  form-control-sm text-center quantity-input" value="1"> *@
+                                    @* <button class="btn btn-outline-secondary btn-sm" type="button">+</button> *@
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <p class="fw-bold">$99.99</p>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-2 text-end">
-                            <p class="fw-bold">$99.99</p>
-                            <button class="btn btn-sm btn-outline-danger">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row cart-item">
-                        <div class="col-md-3">
-                            <img src="https://via.placeholder.com/100" alt="Product 2" class="img-fluid rounded">
-                        </div>
-                        <div class="col-md-5">
-                            <h5 class="card-title">Product 2</h5>
-                            <p class="text-muted">Category: Clothing</p>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                                <input style="max-width:100px" type="text" class="form-control form-control-sm text-center quantity-input" value="2">
-                                <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-                            </div>
-                        </div>
-                        <div class="col-md-2 text-end">
-                            <p class="fw-bold">$49.99</p>
-                            <button class="btn btn-sm btn-outline-danger">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
-                    </div>
+                        <hr>
+                    }
+                   
+                    
                 </div>
             </div>
             <!-- Continue Shopping Button -->

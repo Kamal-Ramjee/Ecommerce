@@ -19,9 +19,14 @@ namespace Ecommerce.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var currentuser = await _userManager.GetUserAsync(HttpContext.User);
+
+            var cart = await _context.Carts
+                .Where(x => x.UserId == currentuser.Id)
+                .ToListAsync();
+            return View(cart);
         }
 
         public async Task<IActionResult> AddToCart(int ProductId, int qty = 1)
@@ -41,7 +46,7 @@ namespace Ecommerce.Controllers
 
             await _context.SaveChangesAsync();
 
-            return View(cart);
+            return RedirectToAction("cart");
         }
     }
 }
