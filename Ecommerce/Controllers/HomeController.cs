@@ -32,6 +32,23 @@ namespace Ecommerce.Controllers
             return View();
         }
 
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Shop()
+        {
+            return View();
+        }
+        public IActionResult Testimonial()
+        {
+            return View();
+        }
+        public IActionResult Why()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
